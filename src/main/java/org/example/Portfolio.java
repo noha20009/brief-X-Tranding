@@ -27,4 +27,6 @@ public class Portfolio {
     public void setQantité(int qantité) {
         this.qantité = qantité;
     }
+
+
 }
