@@ -7,7 +7,7 @@ public class Transaction {
     private List<Asset> listAsset;
     private int quantité;
     private double prix;
-    LocalDate date;
+    private LocalDate date;
 
     public Transaction(List<Asset> listAsset, int quantité, double prix, LocalDate date) {
         this.listAsset = listAsset;
