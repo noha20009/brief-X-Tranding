@@ -6,7 +6,7 @@ import java.util.List;
 public class Portfolio {
     private List<Asset<?>> listAsset = new ArrayList<>();
 
-    public Portfolio(List<Asset<?>> listAsset, int qantité) {
+    public Portfolio(List<Asset<?>> listAsset) {
         this.listAsset = listAsset;
 
     }
@@ -14,16 +14,17 @@ public class Portfolio {
     public void addAsset(Asset<?> asset) {
         if (asset == null) {
             throw new IllegalArgumentException("l'asset ne peut pas étre null");
-            listAsset.add(asset);
         }
-        public double getTotalValue(){
+        listAsset.add(asset);
+    }
+        public double  getTotalvalue(){
             double total = 0;
-            for (Asset<?> asset : listAsset) {
-                total += asset.getValue();
+            for (Asset<?> assets : listAsset) {
+                total += assets.getValue();
             }
             return total;
         }
-    }
 }
+
 
 
