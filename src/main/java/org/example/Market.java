@@ -28,9 +28,5 @@ public class Market {
         return listTrader;
     }
 
-    public ajouterAssets(){
-
-
-    }
 
 }

@@ -3,7 +3,7 @@ package org.example;
 public class CryptoCurrency extends Asset <String>{
     private double quantity;
 
-    public CryptoCurrency(int idAsset, String nom, double prixUnitaire, String type, double quantity) {
+    public CryptoCurrency(int idAsset, String nom, double prixUnitaire, String type, String data, double quantity) {
         super(idAsset, nom, prixUnitaire, type, data);
         this.quantity = quantity;
     }

@@ -34,4 +34,5 @@ public class Trader {
     public void setHistTransaction(String histTransaction) {
         this.histTransaction = histTransaction;
     }
+
 }
