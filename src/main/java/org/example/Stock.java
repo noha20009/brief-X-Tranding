@@ -1,17 +1,14 @@
 package org.example;
 
-public class Stock extends Asset<Double> {
-    private double quantity;
-
-    public Stock(int idAsset, String nom, double prixUnitaire, String type, Double data, double quantity) {
-        super(idAsset, nom, prixUnitaire, type, data);
-        this.quantity = quantity;
+public class Stock extends Asset{
+    public Stock(int idAsset, String nom, double prixUnitaire) {
+        super(idAsset, nom, prixUnitaire);
     }
-
     @Override
-    public double getValue(){
-        return data * quantity;
+    public String getType(){
+        return "stock";
     }
 }
+//Logique : Simple héritage, type fixe.
 
 

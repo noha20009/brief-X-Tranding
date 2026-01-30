@@ -1,38 +1,38 @@
 package org.example;
 
-public class Trader {
-    private double solde;
-    private String portfolio;
-    private String histTransaction;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Trader(double solde, String portfolio, String histTransaction) {
-        this.solde = solde;
-        this.portfolio = portfolio;
-        this.histTransaction = histTransaction;
+public class Trader extends Person {
+    private double balance;
+    private Portfolio<Asset> portfolio;
+//    private List<Transaction> listTransactions;
+
+
+    public Trader(int id, String nom, double balance, Portfolio<Asset> portfolio) {
+        super(id, nom);
+        this.balance = balance;
+        this.portfolio = new Portfolio<>();
     }
 
-    public double getSolde() {
-        return solde;
+    public double getBalance() {
+        return balance;
     }
 
-    public String getPortfolio() {
+    public Portfolio<Asset> getPortfolio() {
         return portfolio;
     }
 
-    public String getHistTransaction() {
-        return histTransaction;
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    public void updateBalance(double montant){
+        this.balance+=montant;
+    }
+    @Override
+    public String toString(){
+        return super.toString() + ",Balance :" +balance;
     }
 
-    public void setSolde(double solde) {
-        this.solde = solde;
-    }
-
-    public void setPortfolio(String portfolio) {
-        this.portfolio = portfolio;
-    }
-
-    public void setHistTransaction(String histTransaction) {
-        this.histTransaction = histTransaction;
-    }
 
 }

@@ -1,18 +1,27 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Transaction {
-    private List<Asset> listAsset;
-    private int quantité;
+    private String type;
+    private Asset asset;
+    private int quantite;
     private double prix;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Transaction(List<Asset> listAsset, int quantité, double prix, LocalDate date) {
-        this.listAsset = listAsset;
-        this.quantité = quantité;
+    public Transaction(String type, Asset asset, int quantite, double prix) {
+        this.type = type;
+        this.asset = asset;
+        this.quantite = quantite;
         this.prix = prix;
-        this.date = date;
+        this.date = LocalDateTime.now();
     }
+
+    @Override
+    public String toString(){
+        return type+ "" +asset.getNom()+ "qantite : "
+                +quantite + "Prix : " +prix+ "date : " +date;
+    }
+
 }

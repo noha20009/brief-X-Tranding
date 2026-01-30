@@ -1,15 +1,15 @@
 package org.example;
 
-public class CryptoCurrency extends Asset <String>{
-    private double quantity;
+public class CryptoCurrency extends Asset {
 
-    public CryptoCurrency(int idAsset, String nom, double prixUnitaire, String type, String data, double quantity) {
-        super(idAsset, nom, prixUnitaire, type, data);
-        this.quantity = quantity;
+    public CryptoCurrency(int idAsset, String nom, double prixUnitaire) {
+        super(idAsset, nom, prixUnitaire);
     }
 
     @Override
-    public double getValue(){
-        return prixUnitaire *quantity;
+    public String getType() {
+        return "Cryptocurrency";
+
     }
+
 }
