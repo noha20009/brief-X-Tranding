@@ -4,14 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
+    private static Market instance;
     private List<Trader> traders;
     private List<Asset> assets;
     private List<Transaction> transactions;
 
-    public Market(List<Trader> listTrider, List<Asset> listAsset, List<Transaction> listTransaction) {
+    private Market() {
         this.traders = new ArrayList<>();
         this.assets = new ArrayList<>();
         this.transactions = new ArrayList<>();
+    }
+    public static Market getInstance(){
+        if (instance == null){
+            instance=new Market();
+        }
+        return instance;
     }
 
     public List<Trader> getTraders() {
