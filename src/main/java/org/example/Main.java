@@ -99,7 +99,7 @@ public class Main {
         }
     }
     public static void TraderMenu(Scanner scan,Market market){
-        System.out.println("entrer votre id traser");
+        System.out.println("entrer votre id trader");
         int traderId = scan.nextInt();
         Trader trader = market.trouverTrader(traderId);
         if (trader==null){
