@@ -6,13 +6,20 @@ import java.util.List;
 public class Trader extends Person {
     private double balance;
     private Portfolio<Asset> portfolio;
-//    private List<Transaction> listTransactions;
+    private List<Transaction> listTransactions = new ArrayList<>();
 
 
     public Trader(int id, String nom, double balance, Portfolio<Asset> portfolio) {
         super(id, nom);
         this.balance = balance;
         this.portfolio = new Portfolio<>();
+    }
+    public void addTransaction(Transaction t){
+        listTransactions.add(t);
+    }
+
+    public List<Transaction> getListTransactions() {
+        return listTransactions;
     }
 
     public double getBalance() {

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Transaction {
+    private int traderId;
     private String type;
     private Asset asset;
     private int quantite;
@@ -16,6 +17,19 @@ public class Transaction {
         this.quantite = quantite;
         this.prix = prix;
         this.date = LocalDateTime.now();
+    }
+
+    public Transaction(int traderId, String type, Asset asset, double prix, LocalDateTime date, int quantite) {
+        this.traderId = traderId;
+        this.type = type;
+        this.asset = asset;
+        this.prix = prix;
+        this.date = date;
+        this.quantite = quantite;
+    }
+
+    public int getTraderId() {
+        return traderId;
     }
 
     @Override
