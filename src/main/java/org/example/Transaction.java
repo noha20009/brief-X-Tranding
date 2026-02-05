@@ -32,6 +32,26 @@ public class Transaction {
         return traderId;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     @Override
     public String toString(){
         return type+ "" +asset.getNom()+ "qantite : "

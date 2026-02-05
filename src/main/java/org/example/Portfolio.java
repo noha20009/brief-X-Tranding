@@ -26,6 +26,16 @@ public class Portfolio<T extends Asset> {
         if (newQuantity == 0) assets.remove(asset);
         else assets.put(asset, newQuantity);
         return true;
+
+//        public void retirerAsset(T asset, int quantite) {
+//            int qte = assets.getOrDefault(asset, 0);
+//            if (qte < quantite)
+//                throw new IllegalArgumentException("Quantité insuffisante");
+//            if (qte == quantite)
+//                assets.remove(asset);
+//            else
+//                assets.put(asset, qte - quantite);
+//        }
     }
     // Vérifier si l'actif est détenu avec quantité suffisante
     public boolean hasAsset(T asset, int quantite){
