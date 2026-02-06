@@ -33,5 +33,15 @@ public abstract class Asset{
         return "idAsset" +idAsset+ ", name" +Nom+ ",prix" +prixUnitaire+ ",type : " +getType();
     }
 //    Logique : Abstraite pour forcer l'implémentation de getType(). Validation : prix positif.
-
+@Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (!(o instanceof Asset)) return false;
+        Asset asset =(Asset) o;
+        return idAsset == asset.idAsset;
+}
+@Override
+    public int hashCode(){
+        return Integer.hashCode(idAsset);
+}
 }

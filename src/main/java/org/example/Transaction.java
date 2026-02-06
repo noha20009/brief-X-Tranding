@@ -1,7 +1,6 @@
 package org.example;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Transaction {
     private int traderId;
@@ -11,7 +10,7 @@ public class Transaction {
     private double prix;
     private LocalDateTime date;
 
-    public Transaction(String type, Asset asset, int quantite, double prix) {
+    public Transaction(int id, String type, Asset asset, int quantite, double prix) {
         this.type = type;
         this.asset = asset;
         this.quantite = quantite;

@@ -43,6 +43,12 @@ public class Main {
             System.out.println("3.ajouter Crypto");
             System.out.println("4.afficher Assets");
             System.out.println("5.afficher traders");
+            System.out.println("6.afficher toutes les transactions");
+            System.out.println("7.transactions filtrées");
+            System.out.println("8.transactions triéés par date");
+            System.out.println("8.transactions triéés par montant");
+            System.out.println("8.montant tatal achet/vendre");
+            System.out.println("8.volume echangé par asset");
             System.out.println("0.retour");
             System.out.println("choix");
             int choice = scan.nextInt();
@@ -89,11 +95,33 @@ public class Main {
                         System.out.println(t);
                     }
                     break;
+                case 6:
+                    market.displayTransactions();
+                    break;
+                case 7:
+                    System.out.println("type (achet/vendre ou vide) : ");
+                    String type = scan.nextLine();
+                    if(type.isEmpty()) type =null;
+                    System.out.println("nom asset (ou vide) : ");
+                    String asset =scan.nextLine();
+                    if (asset.isEmpty()) asset =null;
+                    market.displayFilteredTransactions(type,asset,null,null);
+                    break;
+                case 8:
+                    market.displaySortedByDate(null,null,null,null);
+                case 9:
+                    market.displaySortedByAmount(null,null,null,null);
+                case 10:
+                    market.displayTotalAmounts();
+                    break;
+                case 11:
+                    market.calculateVolumeByAsset();
+
                 case 0:
                     admin=false;
                     break;
                 default:
-                    System.out.println("choix ivalide");
+                    System.out.println("choix invalide");
 
             }
         }
@@ -112,7 +140,7 @@ public class Main {
             System.out.println("1. acheter asset");
             System.out.println("2. vendre asset");
             System.out.println("3. voir portfolio");
-            System.out.println("4. voir transactions");
+            System.out.println("4. voir mes transactions");
             System.out.println("5. voir solde");
             System.out.println("0. sortie");
             int choice =scan.nextInt();
@@ -133,10 +161,13 @@ public class Main {
                     market.vendreAsset(traderId,idVendre,qVendre);
                     break;
                 case 3:
-                    market.displayTransactions();
+                    market.displayPortfolio(traderId);
                     break;
                 case 4:
-                    System.out.println("solde actuel" +trader.getBalance());
+                   market.displayTransactionForTrader(traderId);
+                    break;
+                case 5:
+                    System.out.println("solde actuel : " +trader.getBalance());
                     break;
                 case 0:
                     traderMode=false;

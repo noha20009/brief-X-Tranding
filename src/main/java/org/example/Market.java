@@ -2,7 +2,6 @@ package org.example;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Comparator;
@@ -101,7 +100,7 @@ public class Market {
         }
         trader.updateBalance(-cost);
         trader.getPortfolio().ajouterAsset(asset, quantite);
-        transactions.add(new Transaction("achet", asset, quantite, asset.getPrixUnitaire())
+        transactions.add(new Transaction(trader.getId(),"achet", asset, quantite, asset.getPrixUnitaire())
         );
     }
 
@@ -121,7 +120,7 @@ public class Market {
         trader.updateBalance(revenue);
         trader.getPortfolio().retirerAsset(asset, quantite);
 
-        transactions.add(new Transaction("vendre", asset, quantite, asset.getPrixUnitaire()));
+        transactions.add(new Transaction(trader.getId(), "vendre", asset, quantite, asset.getPrixUnitaire()));
     }
 
     public void displayPortfolio(int idPerson) {
@@ -215,7 +214,7 @@ public class Market {
 
     public double calculateTotalBuyAmount() {
         return transactions.stream()
-                .filter(t -> "BUY".equals(t.getType()))
+                .filter(t -> "achet".equals(t.getType()))
                 .mapToDouble(t -> t.getPrix() * t.getQuantite())
                 .sum();
     }
@@ -223,7 +222,7 @@ public class Market {
 
     public double calculateTotalSellAmount() {
         return transactions.stream()
-                .filter(t -> "SELL".equals(t.getType()))
+                .filter(t -> "vendre".equals(t.getType()))
                 .mapToDouble(t -> t.getPrix() * t.getQuantite())
                 .sum();
     }
