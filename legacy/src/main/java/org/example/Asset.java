@@ -30,7 +30,7 @@ public abstract class Asset{
 
     @Override
     public String toString(){
-        return "idAsset" +idAsset+ ", name" +Nom+ ",prix" +prixUnitaire+ ",type : " +getType();
+        return "idAsset : " +idAsset+ ", name : " +Nom+ ",prix : " +prixUnitaire+ ",type : " +getType();
     }
 //    Logique : Abstraite pour forcer l'implémentation de getType(). Validation : prix positif.
 @Override

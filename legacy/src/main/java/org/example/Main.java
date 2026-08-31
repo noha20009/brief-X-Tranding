@@ -2,12 +2,37 @@ package org.example;
 
 import java.util.Scanner;
 
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    public static void initData(Market market) {
+
+        // Traders
+        Trader t1 = new Trader(1, "Ali", 10000, new Portfolio<>());
+        Trader t2 = new Trader(2, "Sara", 50000, new Portfolio<>());
+
+        market.ajouterTrader(t1);
+        market.ajouterTrader(t2);
+
+        // Assets
+        Asset a1 = new Stock(1, "APPLE", 100);
+        Asset a2 = new CryptoCurrency(2, "BTC", 30000);
+
+        market.ajouterAsset(a1);
+        market.ajouterAsset(a2);
+
+        // Transactions (achat / vente)
+        market.acheterAsset(1, 1, 5);   // Ali achète 5 APPLE
+        market.acheterAsset(2, 2, 1);   // Sara achète 1 BTC
+        market.vendreAsset(1, 1, 2);    // Ali vend 2 APPLE
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Market market = Market.getInstance();
+        initData(market);
+
         boolean  choix= true;
         while (choix){
             System.out.println("\n======Menu Principal");
@@ -46,12 +71,13 @@ public class Main {
             System.out.println("6.afficher toutes les transactions");
             System.out.println("7.transactions filtrées");
             System.out.println("8.transactions triéés par date");
-            System.out.println("8.transactions triéés par montant");
-            System.out.println("8.montant tatal achet/vendre");
-            System.out.println("8.volume echangé par asset");
+            System.out.println("9.transactions triéés par montant");
+            System.out.println("10.montant tatal achet/vendre");
+            System.out.println("11.volume echangé par asset");
             System.out.println("0.retour");
             System.out.println("choix");
             int choice = scan.nextInt();
+            scan.nextLine();
             switch (choice){
                 case 1:
                     System.out.println("id trader");
@@ -99,6 +125,7 @@ public class Main {
                     market.displayTransactions();
                     break;
                 case 7:
+                    scan.nextLine();
                     System.out.println("type (achet/vendre ou vide) : ");
                     String type = scan.nextLine();
                     if(type.isEmpty()) type =null;
@@ -109,13 +136,16 @@ public class Main {
                     break;
                 case 8:
                     market.displaySortedByDate(null,null,null,null);
+                    break;
                 case 9:
                     market.displaySortedByAmount(null,null,null,null);
+                    break;
                 case 10:
                     market.displayTotalAmounts();
                     break;
                 case 11:
-                    market.calculateVolumeByAsset();
+                    market.displayVolumeByAsset();
+                    break;
 
                 case 0:
                     admin=false;

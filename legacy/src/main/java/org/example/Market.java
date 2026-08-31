@@ -58,6 +58,7 @@ public class Market {
         return null;
     }
 
+
     public void ajouterAsset(Asset asset) {
         for (Asset a : assets) {
             if (a.getIdAsset() == asset.getIdAsset()) {
@@ -75,12 +76,18 @@ public class Market {
         }
         return null;
     }
-
     public void afficherActifs() {
-        for (Asset a : assets) {
+//        for (Asset a : assets) {
+//           System.out.println(a);
+//        }
+        int i=0;
+        while(i<assets.size()){
+            Asset a=assets.get(i);
             System.out.println(a);
+            i++;
         }
     }
+
 
     public void acheterAsset(int idTrader, int idAsset, int quantite) {
         Trader trader = trouverTrader(idTrader);
@@ -143,6 +150,7 @@ public class Market {
             System.out.println("trader avec id " +traderId+ "non trouver");
             return;
         }
+
         List<Transaction> transactionForTraer = transactions.stream()
                 .filter(t->t.getTraderId()==traderId)
                 .collect(Collectors.toList());
@@ -155,16 +163,33 @@ public class Market {
     }
 
 
-
-
-    // Méthode pour trier les transactions par montant (prix * quantite, ascendant, après filtrage éventuel)
-    public List<Transaction> sortTransactionsByAmount(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
-        return filterTransactions(type, assetName, startDate, endDate).stream()
-                .sorted(Comparator.comparing(t -> t.getPrix() * t.getQuantite()))  // Trie par montant ascendant
+    public List<Transaction> filterTransactions (String type, String assetName, LocalDateTime starDate, LocalDateTime endDate){
+        return transactions.stream()
+                .filter(t -> type == null || t.getType().equals(type))
+                .filter(t -> assetName == null || t.getAsset().getNom().equals(assetName))
+                .filter(t -> starDate == null || t.getDate().isAfter(starDate) || t.getDate().isEqual(starDate))
+                .filter(t -> endDate == null || t.getDate().isBefore(endDate) || t.getDate().isEqual(endDate))
                 .collect(Collectors.toList());
     }
 
-    // Méthode pour afficher les transactions triées par date
+    public void displayFilteredTransactions(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
+        List<Transaction> filtered = filterTransactions(type, assetName, startDate, endDate);
+        if (filtered.isEmpty()) {
+            System.out.println("Aucune transaction trouvée avec les filtres appliqués.");
+        } else {
+            System.out.println("Transactions filtrées :");
+            filtered.forEach(System.out::println);
+        }
+
+    }
+
+    public List<Transaction> sortTransactionsByDate(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
+        return filterTransactions(type, assetName, startDate, endDate).stream()
+                .sorted(Comparator.comparing(Transaction::getDate))  // Trie par date ascendant
+                .collect(Collectors.toList());
+    }
+
+
     public void displaySortedByDate(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
         List<Transaction> sorted = sortTransactionsByDate(type, assetName, startDate, endDate);
         if (sorted.isEmpty()) {
@@ -174,13 +199,13 @@ public class Market {
             sorted.forEach(System.out::println);
         }
     }
-    public List<Transaction> sortTransactionsByDate(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
+
+    public List<Transaction> sortTransactionsByAmount(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
         return filterTransactions(type, assetName, startDate, endDate).stream()
-                .sorted(Comparator.comparing(Transaction::getDate))  // Trie par date ascendant
+                .sorted(Comparator.comparing(t -> t.getPrix() * t.getQuantite()))
                 .collect(Collectors.toList());
     }
 
-    // Méthode pour afficher les transactions triées par montant
     public void displaySortedByAmount(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
         List<Transaction> sorted = sortTransactionsByAmount(type, assetName, startDate, endDate);
         if (sorted.isEmpty()) {
@@ -192,24 +217,6 @@ public class Market {
 
     }
 
-        public List<Transaction> filterTransactions (String type, String assetName, LocalDateTime starDate, LocalDateTime endDate){
-            return transactions.stream()
-                    .filter(t -> type == null || t.getType().equals(type))
-                    .filter(t -> assetName == null || t.getAsset().getNom().equals(assetName))
-                    .filter(t -> starDate == null || t.getDate().isAfter(starDate) || t.getDate().isEqual(starDate))
-                    .filter(t -> endDate == null || t.getDate().isBefore(endDate) || t.getDate().isEqual(endDate))
-                    .collect(Collectors.toList());
-        }
-    public void displayFilteredTransactions(String type, String assetName, LocalDateTime startDate, LocalDateTime endDate) {
-        List<Transaction> filtered = filterTransactions(type, assetName, startDate, endDate);
-        if (filtered.isEmpty()) {
-            System.out.println("Aucune transaction trouvée avec les filtres appliqués.");
-        } else {
-            System.out.println("Transactions filtrées :");
-            filtered.forEach(System.out::println);
-        }
-
-    }
 
 
     public double calculateTotalBuyAmount() {
@@ -249,5 +256,8 @@ public void displayVolumeByAsset() {
         volumeByAsset.forEach((assetName, volume) -> System.out.println(assetName + ": " + volume));
     }
 }
+
+List<Integer> nombres = List.of(2,6,7,8,4,9,12);
+    int ni = nombres.stream().filter(n->n<7).mapToInt(n->n*n).sum();
 }
 
