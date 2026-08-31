@@ -84,7 +84,7 @@ Pour utiliser ce projet, vous devez disposer de :
 ## 6.2 Cloner le dépôt
 
 ```bash
-git clone https://github.com/noha20009/brief-X-Tranding.git
+git clone https://github.com/noha20009/XTrade.git
 ```
 
 ---
@@ -92,7 +92,7 @@ git clone https://github.com/noha20009/brief-X-Tranding.git
 ## 6.3 Ouvrir le dossier
 
 ```bash
-cd brief-X-Tranding
+cd XTrade
 ```
 
 ---
